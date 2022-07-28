@@ -8,7 +8,7 @@ const products = [
     { id: 3, name: "Basketball", price: 29.99, available: false, category: "Sports Goods" },
     { id: 4, name: "iPod Touch", price: 99.99, available: true, category: "Eletronics" },
     { id: 5, name: "iPhone 5", price: 399.99, available: false, category: "Eletronics" },
-    { id: 6, name: "Nexus 7", price: 199.99, available: true, category: "Eletronics" },
+    { id: 6, name: "Nexus 7", price: 199.99, available: true, category: "Eletronics"},
 ]
 
 type Props ={
@@ -24,6 +24,11 @@ export default function ProductTable(props: Props) {
         products.forEach(product => {
             // Verificar se o nome do produto é compatível com o filtro
             if (!product.name.toLowerCase().includes(props.filterText.toLowerCase())){
+                return;
+            }
+
+            // Verificar se o produto está em estoque
+            if(!product.available && props.inStockOnly){
                 return;
             }
 
