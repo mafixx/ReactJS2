@@ -1,8 +1,15 @@
 import { useState } from "react";
 import styles from "./SearchBar.module.css";
 
-export default function SearchBar() {
-    const [filterText, setFilterText] = useState("");
+type Props ={
+    inStockOnly: boolean;
+    filterText: string;
+    setFilterText: React.Dispatch<React.SetStateAction<string>>;
+    toggleStock: VoidFunction;
+};
+
+export default function SearchBar(props: Props) {
+    
 
     return (
         <form className={styles.form}>
@@ -10,11 +17,13 @@ export default function SearchBar() {
             <input 
                 type="text" 
                 placeholder="Search..."
-                onChange={e => setFilterText(e.target.value)}
-                value={filterText} 
+                onChange={e => props.setFilterText(e.target.value)}
+                value={props.filterText} 
             />
             <label>
-                <input type="checkbox" />Only show products in stock
+                <input type="checkbox" 
+                onChange={props.toggleStock} 
+                checked={props.inStockOnly} />Only show products in stock
             </label>
         </form>
     )

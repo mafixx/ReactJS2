@@ -11,12 +11,22 @@ const products = [
     { id: 6, name: "Nexus 7", price: 199.99, available: true, category: "Eletronics" },
 ]
 
-export default function ProductTable() {
+type Props ={
+    filterText: string;
+    inStockOnly: boolean;
+}
+
+export default function ProductTable(props: Props) {
     function getRows(): JSX.Element[] {
         const rows: JSX.Element[] = [];
         let lastCategory = "";
 
         products.forEach(product => {
+            // Verificar se o nome do produto é compatível com o filtro
+            if (!product.name.toLowerCase().includes(props.filterText.toLowerCase())){
+                return;
+            }
+
             // Verificar se é necessário adicionar o cabeçalho da categoria
             if (product.category != lastCategory) {
                 rows.push(<ProductCategoryRow key={`cr-${product.id}`} {...product} />);
