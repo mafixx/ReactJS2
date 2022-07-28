@@ -1,0 +1,9 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+.form input[type=text] {
+    padding: 10px 5px;
+}
